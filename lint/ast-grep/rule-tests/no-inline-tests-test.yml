@@ -1,0 +1,13 @@
+id: no-inline-tests
+# Suppression via `// ast-grep-ignore: no-inline-tests` is honoured by
+# `ast-grep scan` but not by `ast-grep test`, so it is not covered here.
+valid:
+  - 'fn real() {}'
+  - '#[cfg(not(test))] fn only_in_release() {}'
+  - '#[cfg(feature = "testing")] fn feature_gated() {}'
+  - '#[derive(Debug)] struct Dut;'
+invalid:
+  - '#[cfg(test)] mod tests { #[test] fn a() {} #[test] fn b() {} }'
+  - '#[cfg(all(test, feature = "x"))] mod tests {}'
+  - '#[test] fn stray() {}'
+  - '#[tokio::test] async fn stray() {}'

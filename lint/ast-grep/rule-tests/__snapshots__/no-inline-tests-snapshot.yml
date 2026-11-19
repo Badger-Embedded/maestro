@@ -1,0 +1,26 @@
+id: no-inline-tests
+snapshots:
+  "#[cfg(all(test, feature = \"x\"))] mod tests {}":
+    labels:
+    - source: "#[cfg(all(test, feature = \"x\"))]"
+      style: primary
+      start: 0
+      end: 32
+  "#[cfg(test)] mod tests { #[test] fn a() {} #[test] fn b() {} }":
+    labels:
+    - source: "#[cfg(test)]"
+      style: primary
+      start: 0
+      end: 12
+  "#[test] fn stray() {}":
+    labels:
+    - source: "#[test]"
+      style: primary
+      start: 0
+      end: 7
+  "#[tokio::test] async fn stray() {}":
+    labels:
+    - source: "#[tokio::test]"
+      style: primary
+      start: 0
+      end: 14

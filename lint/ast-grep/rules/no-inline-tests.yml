@@ -1,0 +1,35 @@
+id: no-inline-tests
+language: Rust
+severity: error
+message: Test inside src/. Write a functional test in the crate's tests/ directory instead.
+note: |
+  maestro tests behaviour through public surfaces (see "Testing" in CLAUDE.md).
+  Cover the feature with a functional test under tests/ that drives maestrod
+  through its HTTP API, with hardware emulated by umockdev.
+
+  Small tests are allowed only where the functional tier cannot reach: protocol
+  codecs and parsers, and safety invariants in maestro-core. For those, put
+  this on the line above the attribute, with the reason:
+
+    // ast-grep-ignore: no-inline-tests -- <why the functional tier cannot cover it>
+files:
+  - software/app/crates/*/src/**/*.rs
+utils:
+  cfg-test:
+    kind: attribute_item
+    regex: '^#\[\s*cfg\s*\(.*\btest\b'
+    not:
+      regex: '^#\[\s*cfg\s*\(\s*not\s*\(\s*test\s*\)\s*\)\s*\]$'
+rule:
+  any:
+    # #[cfg(test)] and cfg combinations that enable code only under test.
+    - matches: cfg-test
+    # #[test], #[tokio::test] and similar outside an already-flagged cfg(test) module.
+    - kind: attribute_item
+      regex: '^#\[\s*([A-Za-z_][A-Za-z0-9_]*::)*test\s*\]$'
+      not:
+        inside:
+          kind: mod_item
+          stopBy: end
+          follows:
+            matches: cfg-test
