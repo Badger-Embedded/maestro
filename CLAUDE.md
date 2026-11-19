@@ -24,11 +24,11 @@ A green PR must mean nothing catastrophic broke, so it can be merged. Tests desc
 
 ### Tiers
 
-| Tier       | What runs                                                                                       | Hardware                 | When                  |
-| ---------- | ----------------------------------------------------------------------------------------------- | ------------------------ | --------------------- |
-| Functional | Real `maestrod` driven through its public surface (HTTP API), in `software/app/crates/*/tests/` | Emulated with umockdev   | Every PR              |
-| System     | The built bootc image booted in QEMU, driven over the network, in `software/distro/tests/`      | None or emulated         | Every PR              |
-| HIL        | The functional scenarios against a real board and accessories                                   | Real, self-hosted runner | Scheduled and release |
+| Tier       | What runs                                                                                         | Hardware                 | When                  |
+| ---------- | ------------------------------------------------------------------------------------------------- | ------------------------ | --------------------- |
+| Functional | Real `maestrod` driven through its public interface (HTTP API), in `software/app/crates/*/tests/` | Emulated with umockdev   | Every PR              |
+| System     | The built bootc image booted in QEMU, driven over the network, in `software/distro/tests/`        | None or emulated         | Every PR              |
+| HIL        | The functional scenarios against a real board and accessories                                     | Real, self-hosted runner | Scheduled and release |
 
 ### When you add or change a feature
 
