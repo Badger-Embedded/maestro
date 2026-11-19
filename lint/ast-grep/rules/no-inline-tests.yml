@@ -3,7 +3,7 @@ language: Rust
 severity: error
 message: Test inside src/. Write a functional test in the crate's tests/ directory instead.
 note: |
-  maestro tests behaviour through public surfaces (see "Testing" in CLAUDE.md).
+  maestro tests behaviour through public surfaces (see .claude/rules/testing.md).
   Cover the feature with a functional test under tests/ that drives maestrod
   through its HTTP API, with hardware emulated by umockdev.
 

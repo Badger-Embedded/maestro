@@ -77,7 +77,7 @@ if ((status)); then
     echo "If a commit above changes no behaviour (refactor, rename, doc comment),"
     echo "add a trailer with the reason to that commit's message instead:"
     echo "  No-Tests: <why no test is needed>"
-    echo "See \"Testing\" in CLAUDE.md."
+    echo "See .claude/rules/testing.md."
 fi
 
 exit "$status"
