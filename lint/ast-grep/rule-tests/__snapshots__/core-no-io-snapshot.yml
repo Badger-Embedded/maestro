@@ -1,0 +1,38 @@
+id: core-no-io
+snapshots:
+  "fn load() { let s = std::fs::read_to_string(\"/etc/maestro.toml\"); }":
+    labels:
+    - source: std::fs::read_to_string
+      style: primary
+      start: 20
+      end: 43
+  "fn run() { std::process::Command::new(\"sdwire\").status(); }":
+    labels:
+    - source: std::process::Command::new
+      style: primary
+      start: 11
+      end: 37
+  "pub(crate) use std::process::Command;":
+    labels:
+    - source: pub(crate) use std::process::Command;
+      style: primary
+      start: 0
+      end: 37
+  "use std::fs;":
+    labels:
+    - source: use std::fs;
+      style: primary
+      start: 0
+      end: 12
+  "use std::io::Read;":
+    labels:
+    - source: use std::io::Read;
+      style: primary
+      start: 0
+      end: 18
+  "use std::{collections::HashMap, net::TcpStream};":
+    labels:
+    - source: use std::{collections::HashMap, net::TcpStream};
+      style: primary
+      start: 0
+      end: 48

@@ -1,0 +1,24 @@
+# Build context is the repository root:
+#   podman build -f software/distro/Containerfile .
+ARG BASE_IMAGE=ghcr.io/talhahavadar/dotos-rockpie:latest
+
+FROM docker.io/library/rust:1.99-trixie AS app
+
+WORKDIR /src
+RUN --mount=type=bind,source=software/app,target=/src \
+    --mount=type=cache,dst=/usr/local/cargo/registry \
+    --mount=type=cache,dst=/target \
+    cargo build --release --locked --target-dir /target -p maestrod && \
+    install -D -m 0755 /target/release/maestrod /out/usr/bin/maestrod
+
+FROM ${BASE_IMAGE}
+
+COPY software/distro/rootfs/ /
+COPY --from=app /out/ /
+
+RUN systemctl enable maestrod.service
+
+LABEL org.opencontainers.image.title="maestro" \
+      org.opencontainers.image.description="maestro lab controller on dotOS for the ROCK Pi E"
+
+RUN bootc container lint

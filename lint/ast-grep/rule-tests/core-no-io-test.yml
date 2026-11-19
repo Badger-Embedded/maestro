@@ -1,0 +1,13 @@
+id: core-no-io
+valid:
+  - 'use std::collections::HashMap;'
+  - 'use std::{fmt, collections::BTreeMap};'
+  - 'fn name(d: &Dut) -> &str { &d.name }'
+  - 'let f = std::fmt::format(args);'
+invalid:
+  - 'use std::fs;'
+  - 'use std::io::Read;'
+  - 'use std::{collections::HashMap, net::TcpStream};'
+  - 'pub(crate) use std::process::Command;'
+  - 'fn load() { let s = std::fs::read_to_string("/etc/maestro.toml"); }'
+  - 'fn run() { std::process::Command::new("sdwire").status(); }'

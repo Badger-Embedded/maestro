@@ -1,0 +1,22 @@
+[Unit]
+Description=maestro lab controller
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/maestrod
+User=maestro
+Group=maestro
+SupplementaryGroups=dialout plugdev
+StateDirectory=maestro
+Restart=on-failure
+RestartSec=2
+
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

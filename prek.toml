@@ -1,0 +1,77 @@
+exclude = '^third_party/'
+
+[[repos]]
+repo = "builtin"
+hooks = [
+  { id = "trailing-whitespace", exclude = '^hardware/' },
+  { id = "end-of-file-fixer", exclude = '^hardware/' },
+  { id = "mixed-line-ending", exclude = '^hardware/' },
+  { id = "check-merge-conflict" },
+  { id = "check-added-large-files", exclude = '^hardware/' },
+  { id = "check-yaml" },
+  { id = "check-toml" },
+  { id = "detect-private-key" },
+]
+
+[[repos]]
+repo = "local"
+
+[[repos.hooks]]
+id = "rustfmt"
+name = "rustfmt"
+language = "system"
+entry = "cargo fmt --manifest-path software/app/Cargo.toml --all -- --check"
+files = '^software/app/.*\.rs$'
+pass_filenames = false
+
+[[repos.hooks]]
+id = "clippy"
+name = "clippy"
+language = "system"
+entry = "cargo clippy --manifest-path software/app/Cargo.toml --workspace --all-targets --locked -- -D warnings"
+files = '^software/app/'
+pass_filenames = false
+
+[[repos.hooks]]
+id = "cargo-deny"
+name = "cargo-deny (bans, licenses, sources)"
+language = "system"
+entry = "cargo deny --manifest-path software/app/Cargo.toml check bans licenses sources"
+files = '^software/app/(.*Cargo\.(toml|lock)|deny\.toml)$'
+pass_filenames = false
+
+[[repos.hooks]]
+id = "ast-grep-scan"
+name = "ast-grep project rules"
+language = "system"
+entry = "ast-grep scan"
+files = '\.rs$'
+
+[[repos.hooks]]
+id = "ast-grep-test"
+name = "ast-grep rule tests"
+language = "system"
+entry = "ast-grep test"
+files = '^(sgconfig\.yml|lint/ast-grep/)'
+pass_filenames = false
+
+[[repos.hooks]]
+id = "shellcheck"
+name = "shellcheck"
+language = "system"
+entry = "shellcheck"
+types = ["shell"]
+
+[[repos.hooks]]
+id = "hadolint"
+name = "hadolint"
+language = "system"
+entry = "hadolint"
+files = '(^|/)Containerfile$'
+
+[[repos.hooks]]
+id = "actionlint"
+name = "actionlint"
+language = "system"
+entry = "actionlint"
+files = '^\.github/workflows/.*\.ya?ml$'

@@ -1,0 +1,23 @@
+id: core-no-io
+language: Rust
+severity: error
+message: maestro-core must not do I/O.
+note: |
+  maestro-core holds the domain model only. Put file, network, process and
+  device access in maestro-hw (accessory drivers) or maestrod (server), and
+  pass the results into maestro-core as plain values.
+files:
+  - software/app/crates/maestro-core/**/*.rs
+rule:
+  any:
+    - kind: use_declaration
+      regex: '^(pub(\([^)]*\))?\s+)?use\s+(::)?std::[^;]*\b(fs|net|process|io)\b'
+    - kind: scoped_identifier
+      regex: '^(::)?std::(fs|net|process|io)(::|$)'
+      not:
+        any:
+          - inside:
+              kind: scoped_identifier
+          - inside:
+              kind: use_declaration
+              stopBy: end
