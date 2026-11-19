@@ -1,23 +1,7 @@
 # maestro
 
-Lab controller: a small arm64 board (PoE, USB-C downstream ports) running a bootc image. `software/app` is the Rust workspace, and `software/distro` layers it on `ghcr.io/talhahavadar/dotos-rockpie`.
+Lab controller: a small arm64 board (PoE, USB-C downstream ports) running a bootc image. `software/` holds the Rust workspace and the image, and `hardware/` holds the board design.
 
 Enter the dev shell with `nix develop`. Run `just lint` (prek, all hooks) before you finish a change.
 
-## Rules and what enforces them
-
-Add a rule here only together with its enforcement. If a rule has nothing enforcing it, fix that before adding more text.
-
-| Rule                                                 | Enforced by                                               |
-| ---------------------------------------------------- | --------------------------------------------------------- |
-| `maestro-core` does no I/O (fs, net, process, io)    | ast-grep `core-no-io` (`lint/ast-grep/rules/`)            |
-| No `unwrap()` outside tests, no `dbg!`               | clippy workspace lints (`software/app/Cargo.toml`)        |
-| No `unsafe` code                                     | `unsafe_code = "forbid"` workspace lint                   |
-| Dependencies use allowed licenses and crates.io only | cargo-deny (`software/app/deny.toml`)                     |
-| Formatting                                           | rustfmt hook                                              |
-| Tests live in `tests/`, not in `src/` (see Testing)  | ast-grep `no-inline-tests`                                |
-| Code changes in a PR come with tests (see Testing)   | `tests-accompany-changes` (CI on PRs, `just check-tests`) |
-
-## Testing
-
-The testing rules live in `.claude/rules/testing.md`. Claude Code loads that file when you work on anything under `software/`, so CLAUDE.md does not repeat them.
+Every rule for agents comes with what enforces it. The software rules, their enforcers and the engineering principles are in `software/CLAUDE.md`, which loads when you work under `software/`.

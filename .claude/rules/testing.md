@@ -44,4 +44,4 @@ The `no-inline-tests` lint rejects tests in `src/`. For an allowed small test, p
 - Never weaken or remove an assertion to make a PR pass without saying so in the PR.
 - `cargo-mutants` runs on a schedule (not as a PR gate) to check that the suite catches broken code. When a mutant survives on an important path, strengthen or add a functional test, not a unit test.
 
-Apart from `no-inline-tests`, these are review guidelines, not rules in the enforcement table in `CLAUDE.md`. Each gets an enforcer as its piece lands: required status checks on `main`, the QEMU boot job, the HIL runner and the scheduled `cargo-mutants` workflow.
+Apart from `no-inline-tests`, these are review guidelines, not rules in the enforcement table in `software/CLAUDE.md`. Each gets an enforcer as its piece lands: required status checks on `main`, the QEMU boot job, the HIL runner and the scheduled `cargo-mutants` workflow.
