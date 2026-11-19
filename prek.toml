@@ -75,3 +75,20 @@ name = "actionlint"
 language = "system"
 entry = "actionlint"
 files = '^\.github/workflows/.*\.ya?ml$'
+
+[[repos.hooks]]
+id = "tests-accompany-changes"
+name = "code changes come with tests"
+language = "system"
+entry = "lint/scripts/tests-accompany-changes.sh"
+stages = ["manual"]
+always_run = true
+pass_filenames = false
+
+[[repos.hooks]]
+id = "tests-accompany-changes-test"
+name = "tests-accompany-changes self-test"
+language = "system"
+entry = "lint/scripts/tests-accompany-changes-test.sh"
+files = '^lint/scripts/tests-accompany-changes'
+pass_filenames = false

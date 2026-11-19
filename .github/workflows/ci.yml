@@ -18,12 +18,20 @@ jobs:
     runs-on: ubuntu-26.04-arm
     steps:
       - uses: actions/checkout@v7
+        with:
+          # Full history so the PR's commits and the base branch are both present.
+          fetch-depth: 0
       - uses: cachix/install-nix-action@v31
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: software/app
       - name: Lint (all prek hooks)
         run: nix develop -c just lint
+      - name: Code changes come with tests
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: nix develop -c just check-tests "origin/$BASE_REF"
       - name: Test
         run: nix develop -c just test
       - name: Security advisories
