@@ -1,0 +1,3 @@
+[submodule "third_party/maestro-private"]
+	path = third_party/maestro-private
+	url = git@github.com:Badger-Embedded/maestro-private.git
