@@ -18,3 +18,5 @@ unsafe_code = "forbid"
 [workspace.lints.clippy]
 unwrap_used = "deny"
 dbg_macro = "deny"
+allow_attributes = "deny"
+allow_attributes_without_reason = "deny"

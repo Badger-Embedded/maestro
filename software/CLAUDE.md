@@ -15,6 +15,8 @@ Add a rule here only together with its enforcement. If a rule has nothing enforc
 | Formatting                                           | rustfmt hook                                              |
 | Tests live in `tests/`, not in `src/`                | ast-grep `no-inline-tests`                                |
 | Code changes in a PR come with tests                 | `tests-accompany-changes` (CI on PRs, `just check-tests`) |
+| Lint suppressions are `#[expect]` with a `reason`    | clippy `allow_attributes`, `allow_attributes_without_reason` |
+| A comment says only what code cannot (unslop rule 29) | `/no-comments` review, required by the `no-comments-gate` hook on `git commit` in Claude Code (`.claude/settings.json`) |
 
 ## Principles
 
