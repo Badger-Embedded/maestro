@@ -1,6 +1,7 @@
 ---
 name: open-pr
 description: Open a pull request that follows CONTRIBUTING.md, with one change per pull request, a kernel-style title and a Why, Docs and Verification description. Use before running gh pr create, or when asked to open, prepare or submit a pull request.
+model: haiku
 ---
 
 # Open a pull request

@@ -1,6 +1,7 @@
 ---
 name: unslop
 description: Writing rules for commit messages, PR descriptions, docs, CLAUDE.md and rule files, and code comments. Use before writing or editing any of them.
+model: haiku
 ---
 
 # Unslop
