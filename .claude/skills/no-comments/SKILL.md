@@ -1,6 +1,7 @@
 ---
 name: no-comments
 description: Review the comment lines this branch adds under software/ with the comment-reviewer subagent, apply its findings, and record the review for the commit gate. Use when the no-comments gate blocks a git commit, or before opening a PR.
+model: haiku
 ---
 
 # No comments
